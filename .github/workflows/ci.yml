@@ -34,4 +34,4 @@ jobs:
         run: |
           curl -u ${{ github.actor }}:${{ secrets.PAT_TOKEN }} \
           -s -o /dev/null -w "%{http_code}" \
-          https://maven.pkg.github.com/BPLaurensDeVos/repo1/com/example/repo1/repo1/1.0-SNAPSHOT/repo1-1.0-SNAPSHOT.jar
+          https://maven.pkg.github.com/BPLaurensDeVos/repo1/com/example/repo1/repo1/1.0/repo1-1.0.jar
