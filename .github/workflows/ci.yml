@@ -18,26 +18,29 @@ jobs:
           java-version: 17
           distribution: 'temurin'
       
-      - name: Configure Maven Settings for GitHub Packages
+      - name: Configure Maven for GitHub Packages
         run: |
           mkdir -p ~/.m2
-          echo "<settings xmlns='http://maven.apache.org/SETTINGS/1.0.0'
-                        xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-                        xsi:schemaLocation='http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd'>
-                  <servers>
-                    <server>
-                      <id>github</id>
-                      <username>${env.GITHUB_ACTOR}</username>
-                      <password>${env.GITHUB_TOKEN}</password>
-                    </server>
-                  </servers>
-                </settings>" > ~/.m2/settings.xml
+          cat <<EOF > ~/.m2/settings.xml
+          <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+            <servers>
+              <server>
+                <id>github</id>
+                <username>${{ env.GITHUB_ACTOR }}</username>
+                <password>${{ env.GITHUB_TOKEN }}</password>
+              </server>
+            </servers>
+          </settings>
+          EOF
           cat ~/.m2/settings.xml
+
 
       - name: Debug GITHUB_ACTOR and GITHUB_TOKEN
         run: |
-          echo "GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}"
-          echo "GITHUB_TOKEN is set: $([[ -n "${{ secrets.GITHUB_TOKEN }}" ]] && echo 'Yes' || echo 'No')"
+          echo "GITHUB_ACTOR: ${env.GITHUB_ACTOR}"
+          echo "GITHUB_TOKEN: ${env.GITHUB_TOKEN}"
 
 
       - name: Build and Test
