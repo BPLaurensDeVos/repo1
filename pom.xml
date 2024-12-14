@@ -40,6 +40,7 @@
       </plugin>
     </plugins>
   </build>
+<<<<<<< HEAD
 
   <!-- Other configurations -->
   <distributionManagement>
@@ -55,4 +56,6 @@
       <url>https://maven.pkg.github.com/BPLaurensDeVos/repo1</url>
     </repository>
   </repositories>
+=======
+>>>>>>> 5b59f0b25a28974569c8d3ee74d6291191b30afe
 </project>
