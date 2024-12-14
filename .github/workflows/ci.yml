@@ -32,4 +32,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: mock-deploy-artifacts
-          path: $GITHUB_WORKSPACE/mock/deploy
+          path: $GITHUB_WORKSPACE/mock/deploy/repo1
+          if-no-files-found: warn
