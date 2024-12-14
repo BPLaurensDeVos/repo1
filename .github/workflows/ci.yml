@@ -32,6 +32,10 @@ jobs:
               "key": "interactiveMode",
               "value": "false"
             }]
+      
+      - name: Debug settings.xml
+        run: cat ~/.m2/settings.xml
+
 
       - name: Debug GITHUB_ACTOR and GITHUB_TOKEN
         run: |
