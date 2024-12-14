@@ -27,5 +27,5 @@ jobs:
       - name: Publish to GitHub Packages
         run: mvn deploy
         env:
-          GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
+          GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
