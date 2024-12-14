@@ -24,7 +24,7 @@ jobs:
       - name: Deploy to Mock Environment
         run: |
           echo "Deploying Repo1 to mock environment..."
-          mkdir -p 
+          mkdir -p $GITHUB_WORKSPACE/mock/deploy/repo1
           cp target/repo1-1.0-SNAPSHOT.jar $GITHUB_WORKSPACE/mock/deploy/repo1/
       
       - name: Upload artifact
