@@ -16,39 +16,26 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: 17
+          distribution: 'temurin'
 
       - name: Build and Test
         run: mvn clean package
-
-      - name: Verify Target Directory
-        run: |
-          echo "Checking contents of target directory:"
-          ls -l target
 
       - name: Deploy to Mock Environment
         run: |
           echo "Deploying Repo1 to mock environment..."
           mkdir -p $GITHUB_WORKSPACE/mock/deploy/repo1
+          ls -l target  # Debugging: Controleer of het bestand in target aanwezig is
           cp target/repo1-1.0-SNAPSHOT.jar $GITHUB_WORKSPACE/mock/deploy/repo1/
-
-      - name: Verify Mock Deploy Directory
-        run: |
-          echo "Checking contents of mock directory:"
-          ls -lR $GITHUB_WORKSPACE/mock
-
-      - name: Log Paths
-        run: |
-          echo "Target Path: $GITHUB_WORKSPACE/target/repo1-1.0-SNAPSHOT.jar"
-          echo "Mock Deploy Path: $GITHUB_WORKSPACE/mock/deploy/repo1"
-
+      
       - name: Search for Artifacts
         run: |
           echo "Searching for all .jar files in workspace..."
           find $GITHUB_WORKSPACE -name "*.jar" -print
 
-      - name: Upload Mock Deploy Artifacts
+
+      - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: mock-deploy-artifacts
           path: $GITHUB_WORKSPACE/mock/deploy/repo1
-          if-no-files-found: warn
