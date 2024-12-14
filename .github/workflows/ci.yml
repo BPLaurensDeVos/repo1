@@ -25,7 +25,7 @@ jobs:
         run: mvn clean package
 
       - name: Publish to GitHub Packages
-        run: mvn clean package
+        run: mvn deploy
         env:
           GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
