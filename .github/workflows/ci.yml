@@ -18,21 +18,20 @@ jobs:
           java-version: 17
           distribution: 'temurin'
       
-      - name: Configure Maven Settings for GitHub Packages
-        run: |
-          mkdir -p ~/.m2
-          echo "<settings xmlns='http://maven.apache.org/SETTINGS/1.0.0'
-                        xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-                        xsi:schemaLocation='http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd'>
-                  <servers>
-                    <server>
-                      <id>github</id>
-                      <username>${{ secrets.GITHUB_ACTOR }}</username>
-                      <password>${{ secrets.GITHUB_TOKEN }}</password>
-                    </server>
-                  </servers>
-                </settings>" > ~/.m2/settings.xml
-          cat ~/.m2/settings.xml
+      - name: Set Maven Settings
+        uses: s4u/maven-settings-action@v2
+        with:
+          servers: |
+            [{
+              "id": "github",
+              "username": "${{ secrets.GITHUB_ACTOR }}",
+              "password": "${{ secrets.GITHUB_TOKEN }}"
+            }]
+          options: |
+            [{
+              "key": "interactiveMode",
+              "value": "false"
+            }]
 
       - name: Debug GITHUB_ACTOR and GITHUB_TOKEN
         run: |
