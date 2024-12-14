@@ -25,10 +25,11 @@ jobs:
         run: |
           echo "Deploying Repo1 to mock environment..."
           mkdir -p $GITHUB_WORKSPACE/mock/deploy/repo1
+          ls -l target  # Debugging: Controleer of het bestand in target aanwezig is
           cp target/repo1-1.0-SNAPSHOT.jar $GITHUB_WORKSPACE/mock/deploy/repo1/
       
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: mock-deploy-artifacts
-          path: $GITHUB_WORKSPACE/mock/deploy/repo1
+          path: $GITHUB_WORKSPACE/mock/deploy/repo1/
