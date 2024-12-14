@@ -40,20 +40,4 @@
       </plugin>
     </plugins>
   </build>
-
-  <!-- Add GitHub Packages configuration -->
-  <distributionManagement>
-    <repository>
-      <id>github</id>
-      <url>https://maven.pkg.github.com/BPLaurensDeVos/repo1</url>
-    </repository>
-  </distributionManagement>
-  
-  <!-- Add GitHub Packages for dependency resolution -->
-  <repositories>
-    <repository>
-      <id>github</id>
-      <url>https://maven.pkg.github.com/BPLaurensDeVos/repo1</url>
-    </repository>
-  </repositories>
 </project>
