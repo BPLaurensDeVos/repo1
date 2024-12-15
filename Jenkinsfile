@@ -1,30 +1,22 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'Maven3'
+        jdk 'jdk17'
+    }
+
     environment {
-        GITHUB_ACTOR = 'laurensdevos2001'      // Vervang door je GitHub username
+        GITHUB_ACTOR = credentials('GITHUB_ACTOR')      // Vervang door je GitHub username
         GITHUB_TOKEN = credentials('PAT_TOKEN')      // GitHub Personal Access Token opgeslagen in Jenkins credentials
     }
 
-    tools {
-        maven 'Maven3'
-    }
 
     stages {
         stage('Checkout Repository') {
             steps {
                 echo "Checking out repository..."
                 checkout scm
-            }
-        }
-
-        stage('Set up JDK 17') {
-            steps {
-                echo "Setting up JDK 17..."
-                // Installeer JDK 17 via Jenkins Tools (configureer dit in Jenkins Global Tool Configuration)
-                script {
-                    tool name: 'jdk17', type: 'jdk'
-                }
             }
         }
 
@@ -56,11 +48,7 @@ pipeline {
         stage('Publish to GitHub Packages') {
             steps {
                 echo "Publishing to GitHub Packages..."
-                sh """
-                mvn deploy \
-                    -Dgithub.actor=${env.GITHUB_ACTOR} \
-                    -Dgithub.token=${env.GITHUB_TOKEN}
-                """
+                sh "mvn deploy"
             }
         }
     }
