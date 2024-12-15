@@ -6,6 +6,10 @@ pipeline {
         GITHUB_TOKEN = credentials('PAT_TOKEN')      // GitHub Personal Access Token opgeslagen in Jenkins credentials
     }
 
+    tools {
+        maven 'Maven3'
+    }
+
     stages {
         stage('Checkout Repository') {
             steps {
